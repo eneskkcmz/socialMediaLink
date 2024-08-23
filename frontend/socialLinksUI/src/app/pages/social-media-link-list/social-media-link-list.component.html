@@ -1,0 +1,71 @@
+<div class="table-container">
+    <div class="button">
+        <button (click)="openAddDialog()">
+            <i class="fa fa-plus" aria-hidden="true" style="margin-right: 8px;"></i>
+            Yeni Hesap Ekle
+        </button>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+          <input class="search" type="text" placeholder="Search objects..." [(ngModel)]="searchValue" aria-label="Search" />
+          <i (click)="applyFilter()" class="fa fa-search search-icon" aria-hidden="true"></i>
+        </div>
+        <button class="search-button">
+          <img src="assets/filterIcon.png" alt="Filter Icon" class="filter-icon" />
+        </button>
+      </div>
+         
+
+    <div class="table-in">
+        <table mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="linkAdress">
+                <th style="font-weight: 700;" mat-header-cell *matHeaderCellDef mat-sort-header="linkAdress">Sosyal
+                    Medya Linki</th>
+                <td style="font-weight: 500;" mat-cell *matCellDef="let element">{{ element.linkAdress }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="linkAdressName">
+                <th style="font-weight: 700;" mat-header-cell *matHeaderCellDef mat-sort-header="linkAdressName">Sosyal
+                    Medya Adı</th>
+                <td style="font-weight: 500;" mat-cell *matCellDef="let element">{{ element.linkAdressName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="linkAddressDescription">
+                <th style="font-weight: 700;" mat-header-cell *matHeaderCellDef>Açıklama</th>
+                <td style="font-weight: 500;" mat-cell *matCellDef="let element">{{ element.linkAdressDescription }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <div class="items-per-page">
+            <label for="pageSize">Show:</label>
+            <div class="select-container">
+                <span>{{pageSize}} rows</span>
+                <div class="arrows">
+                    <img src="../../../assets/yukarı.png" class="up" (click)="increasePageSize()">
+                    <img src="../../../assets/aşağı.png" class="down" (click)="decreasePageSize()">
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination-controls">
+            <i class="fa-solid fa-angle-left" [ngClass]="{
+          'disabled-icon': currentPage === 0, 
+          'nonDisabled-icon': currentPage > 0
+        }" (click)="currentPage > 0 ? previousPage() : null" style="margin-right: 3px;"></i>
+
+            <span>{{currentPage + 1}} of {{totalPages}}</span>
+
+            <i class="fa-solid fa-angle-right" [ngClass]="{
+          'disabled-icon': currentPage === totalPages - 1, 
+          'nonDisabled-icon': currentPage < totalPages - 1
+        }" (click)="currentPage < totalPages - 1 ? nextPage() : null" style="margin-right: 3px;"></i>
+        </div>
+    </div>
+</div>

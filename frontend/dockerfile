@@ -1,0 +1,17 @@
+FROM node:20
+
+WORKDIR /app
+
+COPY ["/socialLinksUI/package.json", "."]
+COPY ["/socialLinksUI/package-lock.json", "."]
+
+RUN npm install
+
+COPY ["/socialLinksUI", "."]
+
+RUN npm install -g @angular/cli
+
+WORKDIR /app/socialLinksUI/
+
+CMD ["ng", "serve", "--host", "0.0.0.0"]
+

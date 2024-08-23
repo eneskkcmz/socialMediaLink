@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: social-links-ui
+    image: ${DOCKER_REGISTRY-}front
+    build: 
+      context: frontend
+      dockerfile: dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - social-links-network
+
+  backend:
+    container_name: social-links-backend
+    image: ${DOCKER_REGISTRY-}backend
+    build: 
+      context: backend
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_URI: mongodb://mongo/socialLinks
+    networks:
+      - social-links-network
+    depends_on:
+      - mongo
+  mongo:
+    container_name: social-links-mongo-db
+    image: mongodb/mongodb-community-server:latest
+    ports:
+      - "27000:27017"
+    volumes:
+      - mongo_db_volume:/data/db
+    networks:
+      - social-links-network
+      
+networks:
+  social-links-network:
+    driver: bridge
+
+volumes:
+  mongo_db_volume:

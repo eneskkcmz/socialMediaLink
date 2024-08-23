@@ -1,0 +1,23 @@
+#16.20.2
+FROM node:16.20.1
+
+
+WORKDIR /app
+
+COPY ["./socialLinkAPI/package.json", "/app"]
+COPY ["/socialLinkAPI/package-lock.json", "/app"]
+
+
+RUN npm install
+COPY . .
+
+
+CMD ["sh", "-c", "node socialLinkAPI/seed.js && node socialLinkAPI/socialLinksApiServer.js"]
+
+
+
+# CMD  "node socialLinkAPI/seed.js && node socialLinkAPI/socialLinksApiServer.js"
+# CMD ["node", "socialLinkAPI/seed.js"]
+# CMD ["node", "socialLinkAPI/socialLinksApiServer.js" ]
+## docker build -t sociallink:backend .
+## docker run --rm -p 8080:8080 sociallink:backend

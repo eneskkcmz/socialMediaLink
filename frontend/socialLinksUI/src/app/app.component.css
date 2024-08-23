@@ -1,0 +1,51 @@
+.navbar-nav {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex: 1;
+    font-weight: 400;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item.col {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.navbar-nav .nav-item img {
+    width: 18px;
+    height: 18px;
+    border-radius: 1.94px 0px 0px 0px;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+    margin-right: 1px;
+}
+
+.navbar-nav .nav-item:last-child {
+    margin-right: 150px;
+}
+
+.navbar-brand {
+    position: relative;
+    padding-right: 200px;
+}
+
+.navbar-brand img {
+    width: 124.27px;
+    height: 36.7px;
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    margin-left: 100px;
+}
